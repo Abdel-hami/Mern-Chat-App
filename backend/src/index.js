@@ -23,7 +23,7 @@ app.use(
     })
 );
 app.use("/api/auth", authRoutes);
-app.use("/api/message", MessageRoutes);
+app.use("/api/messages", MessageRoutes);
 
 app.listen(port,()=>{
     console.log("server runing at : " , port)
