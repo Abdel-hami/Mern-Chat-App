@@ -6,8 +6,8 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import  {connectDB}  from "./lib/db.js";
-
-const app = express();
+import { app,server } from "./lib/socket.js";
+// const app = express();
 // middlware to let us extract the json data from the body
 app.use(express.json());
 
@@ -25,7 +25,7 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", MessageRoutes);
 
-app.listen(port,()=>{
+server.listen(port,()=>{
     console.log("server runing at : " , port)
     connectDB();
 })

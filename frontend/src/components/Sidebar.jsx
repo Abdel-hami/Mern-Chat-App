@@ -13,10 +13,15 @@ const Sidebar = () => {
         sellecteduser,
         isUsersLoading } = useChatStore();
     const { onlineUsers } = useAuthStore();
-    const [showOnlineOnly, setShowOnlineOnly] = useState(null)
+    const [showOnlineOnly, setShowOnlineOnly] = useState(null);
+
+
     useEffect(() => {
         getUsers();
     }, [getUsers])
+
+    const filtredUsers = showOnlineOnly ? users.filter(user => onlineUsers.includes(user._id)) : users;
+
     if (isUsersLoading) return <SidebarSkeleton />
 
     return (
@@ -25,7 +30,7 @@ const Sidebar = () => {
                 <div className="flex items-center gap-2">
                     <Users className="size-6" />
                     <span className="font-medium hidden lg:block">Contacts</span>
-                </div>
+                </div> 
                 {/* TODO: Online filter toggle */}
                 <div className="mt-3 hidden lg:flex items-center gap-2">
                     <label className="cursor-pointer flex items-center gap-2">
@@ -42,7 +47,7 @@ const Sidebar = () => {
             </div>
 
             <div className="overflow-y-auto w-full py-3">
-                {users.map((user) => (
+                {filtredUsers.map((user) => (
                     <button
                         key={user._id}
                         onClick={() => setSelecteduser(user)}
@@ -75,7 +80,9 @@ const Sidebar = () => {
                         </div>
                     </button>
                 ))}
-
+                {filtredUsers.length == 0 && (
+                    <div className='text-center text-zinc-500 py-4'>No Online Users</div>
+                )}
             </div>
         </aside>
     );

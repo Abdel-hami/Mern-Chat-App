@@ -28,7 +28,7 @@ import User from "../models/user.model.js";
 
 export const protectRoute = async (req, res, next) => {
     try {
-        console.log("Cookies received: ", req.cookies); // Debugging log
+        // console.log("Cookies received: ", req.cookies); // Debugging log
         const token = req.cookies.jwt;
 
         if (!token) {
@@ -37,18 +37,18 @@ export const protectRoute = async (req, res, next) => {
 
         // Decode the token to inspect its payload
         const decoded = jwt.decode(token);
-        console.log("Decoded token:", decoded);
+        // console.log("Decoded token:", decoded);
 
         if (!decoded) {
             return res.status(401).json({ message: "Unauthorized - Token invalid" });
         }
 
         // Debug: Log the JWT_SECRET
-        console.log("JWT_SECRET:", process.env.JWT_SECRET);
+        // console.log("JWT_SECRET:", process.env.JWT_SECRET);
 
         // Verify the token
         const verified = jwt.verify(token, process.env.JWT_SECRET);
-        console.log("Verified token:", verified);
+        // console.log("Verified token:", verified);
 
         const user = await User.findById(verified.userId).select("-password");
         if (!user) {
