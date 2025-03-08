@@ -2,7 +2,7 @@ import NavBar from './components/NavBar'
 import { Routes, Route, Navigate } from "react-router-dom"
 
 import LoginPage from './pages/LoginPage'
-import Homepage from './pages/Homepage'
+import Homepage from './pages/HomePage'
 import SignupPage from "./pages/SignupPage"
 import SettingsPage from "./pages/SettingsPage"
 import ProfilePage from "./pages/ProfilePage"
