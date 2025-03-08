@@ -1,32 +1,9 @@
 
-// import {create} from "zustand";
-// import { axiosInstance } from "../lib/axios";
-
-// export const useAuthStore = create((set) => ({
-//     authUser: null,
-//     isSigningUp: false,
-//     isLogingIn: false,
-//     isupdatingProfile: false,
-
-//     checkAuth: async () => {
-//         try {
-//             const res = await axiosInstance.get("/auth/check");
-//             set({authUser:res.data});
-//         } catch (error) {
-//             console.log("error in useAuthStore: ", error.message)
-//             set({authUser:null});
-//         } finally {
-//             set({iscCheckingAuth: false});
-//         }
-//     },
-//     iscCheckingAuth: true,
-// }))
-
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 import {io} from 'socket.io-client'
-const BASE_URL = "http://localhost:5001"
+const BASE_URL = import.meta.env.MODE === "development" ?  "http://localhost:5001": "/"
 export const useAuthStore = create((set,get) => ({
     authUser: null,
     isSigningUp: false,
